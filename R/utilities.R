@@ -27,7 +27,8 @@ swirl_out <- function(..., skip_before=TRUE, skip_after=FALSE) {
     #mes <- iconv(mes,"UTF-8","BIG5")
     
    if(mes == iconv(iconv(mes,"UTF-8","BIG5"),"BIG5","UTF-8")){
-    mes <- '1'}
+    mes <- '1'}else{
+    mes <- '2'}
   }
   
   
