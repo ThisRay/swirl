@@ -100,7 +100,7 @@ check_strings <- function(){
     load(file.path("R", "sysdata_win.rda"))
     langs <- ls()
     for(i in list.files("R", pattern = "\\.R$")){
-      source_code <- readLines(file.path("R", i), warn = FALSE)
+      source_code <- readLines(file.path("R", i), warn = FALSE, encoding="BIG5")
       strings <- grep("s\\(\\)%N%", source_code)
       for(j in strings){
         for(l in langs){
