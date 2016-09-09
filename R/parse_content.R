@@ -35,13 +35,13 @@ wrap_encoding <- function(raw_yaml) {
     retval
   } else {
     if (class(raw_yaml) == "character") {
-      # if (Encoding(raw_yaml) == "unknown" ) {
-      #   Encoding(raw_yaml) <- "UTF-8"
-      # }
-      if (Encoding(raw_yaml) == "unknown") {
-        if(grepl('mingw', sessionInfo()$R.version$os)){Encoding(raw_yaml) <- "BIG5"
-        }else{Encoding(raw_yaml) <- "UTF-8"}
-      }      
+      if (Encoding(raw_yaml) == "unknown" ) {
+        Encoding(raw_yaml) <- "UTF-8"
+      }
+      # if (Encoding(raw_yaml) == "unknown") {
+      #   if(grepl('mingw', sessionInfo()$R.version$os)){Encoding(raw_yaml) <- "BIG5"
+      #   }else{Encoding(raw_yaml) <- "UTF-8"}
+      # }      
       
     }
     raw_yaml
@@ -67,6 +67,17 @@ parse_content.yaml <- function(file, e){
     temp
   }
   raw_yaml <- yaml.load_file(file)
+  
+  if(grepl('mingw', sessionInfo()$R.version$os)){
+    win_make_yaml <- function(ls){
+  	for(i in 1:length(ls)){
+  		ls[[i]] <- iconv(ls[[i]],"UTF-8","BIG5")}
+  		ls
+    }
+   raw_yaml <- win_make_yaml(raw_yaml)
+  }
+  
+
   raw_yaml <- wrap_encoding(raw_yaml)
   temp <- lapply(raw_yaml[-1], newrow)
   df <- NULL
