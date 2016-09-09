@@ -4,9 +4,17 @@ swirl_out <- function(..., skip_before=TRUE, skip_after=FALSE) {
   mes <- str_c("| ", wrapped, collapse = "\n")
   if(skip_before) mes <- paste0("\n", mes)
   if(skip_after) mes <- paste0(mes, "\n")
-  Encoding(mes) <- "UTF-8"
+
+  ## windows
+  if(grepl('mingw', sessionInfo()$R.version$os)){
+    Encoding(mes) <- "BIG5"
+  }else{
+    Encoding(mes) <- "UTF-8"
+  }
+  
   message(mes)
 }
+
 
 # Takes a plain English name and turns it into a more proper 
 # file or directory name
