@@ -30,7 +30,7 @@ swirl_out <- function(..., skip_before=TRUE, skip_after=FALSE) {
   if(grepl('mingw', sessionInfo()$R.version$os)){
     #mes <- iconv(mes,"UTF-8","BIG5")
     
-   if(test_is.UTF8(mes))){
+   if(test_is.UTF8(mes)){
     mes <- '1'}else{
     mes <- '2'}
   }
