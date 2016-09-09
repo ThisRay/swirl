@@ -7,9 +7,9 @@ swirl_out <- function(..., skip_before=TRUE, skip_after=FALSE) {
   wrapped <- strwrap(str_c(..., sep = " "),
                      width = getOption("width") - 2)
   
-  if(grepl('mingw', sessionInfo()$R.version$os)){
-    wrapped <- iconv(wrapped,"UTF-8","BIG5")
-  }
+  # if(grepl('mingw', sessionInfo()$R.version$os)){
+  #   wrapped <- iconv(wrapped,"UTF-8","BIG5")
+  # }
   
   mes <- str_c("| ", wrapped, collapse = "\n")
   if(skip_before) mes <- paste0("\n", mes)
