@@ -23,9 +23,9 @@ swirl_out <- function(..., skip_before=TRUE, skip_after=FALSE) {
 
   Encoding(mes) <- "UTF-8"
   ## windows
-  if(grepl('mingw', sessionInfo()$R.version$os)){
-    mes <- iconv(mes,"UTF-8","BIG5")
-  }
+  # if(grepl('mingw', sessionInfo()$R.version$os)){
+  #   mes <- iconv(mes,"UTF-8","BIG5")
+  # }
   
   
   message(mes)
