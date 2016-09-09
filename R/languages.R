@@ -62,7 +62,11 @@ compile_languages <- function(){
   }
   
   comma_sep_langs <- paste(sub(".yaml$", "", basename(menus)), collapse = ", ")
-  cmd <- paste0("save(", comma_sep_langs, ", file = file.path('R', 'sysdata.rda'))")
+  if(grepl('mingw', sessionInfo()$R.version$os)){
+    cmd <- paste0("save(", comma_sep_langs, ", file = file.path('R', 'sysdata_win.rda'))")
+  }else{
+    cmd <- paste0("save(", comma_sep_langs, ", file = file.path('R', 'sysdata.rda'))")
+  }
   eval(parse(text=cmd))
   unlink(clone_dir, recursive = TRUE, force = TRUE)
 }
