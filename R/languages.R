@@ -82,8 +82,8 @@ s <- function(){
 
 s_helper <- function(x){
 
-  if(grepl('mingw', sessionInfo()$R.version$os)){
-    x <- iconv(x,'UTF-8','BIG5')}
+  # if(grepl('mingw', sessionInfo()$R.version$os)){
+  #   x <- iconv(x,'UTF-8','BIG5')}
 
   cmd <- paste0(swirl_language(), "$`", x, "`")
   tryCatch(eval(parse(text=cmd)),
