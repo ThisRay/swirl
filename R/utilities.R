@@ -15,13 +15,13 @@ swirl_out <- function(..., skip_before=TRUE, skip_after=FALSE) {
   if(skip_before) mes <- paste0("\n", mes)
   if(skip_after) mes <- paste0(mes, "\n")
 
-   if(grepl('mingw', sessionInfo()$R.version$os)){
-     Encoding(mes) <- "BIG5"
-   }else{
-     Encoding(mes) <- "UTF-8"
-   }
+   #if(grepl('mingw', sessionInfo()$R.version$os)){
+   #  Encoding(mes) <- "BIG5"
+   #}else{
+   #  Encoding(mes) <- "UTF-8"
+   #}
 
- # Encoding(mes) <- "UTF-8"
+ Encoding(mes) <- "UTF-8"
   
 	# test_is.BIG5 <- function(s){!is.na(iconv(iconv(s,"BIG5","UTF-8"),"UTF-8","BIG5"))}
 	# test_is.UTF8 <- function(s){!is.na(iconv(iconv(s,"UTF-8","BIG5"),"BIG5","UTF-8"))}  
