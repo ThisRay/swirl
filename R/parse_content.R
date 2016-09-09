@@ -68,14 +68,14 @@ parse_content.yaml <- function(file, e){
   }
   raw_yaml <- yaml.load_file(file)
   
-  if(grepl('mingw', sessionInfo()$R.version$os)){
-    win_make_yaml <- function(ls){
-  	for(i in 1:length(ls)){
-  		ls[[i]] <- iconv(ls[[i]],"UTF-8","BIG5")}
-  		ls
-    }
-   raw_yaml <- win_make_yaml(raw_yaml)
-  }
+  # if(grepl('mingw', sessionInfo()$R.version$os)){
+  #   win_make_yaml <- function(ls){
+  # 	for(i in 1:length(ls)){
+  # 		ls[[i]] <- iconv(ls[[i]],"UTF-8","BIG5")}
+  # 		ls
+  #   }
+  # raw_yaml <- win_make_yaml(raw_yaml)
+  # }
   
 
   raw_yaml <- wrap_encoding(raw_yaml)
