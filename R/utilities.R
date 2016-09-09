@@ -1,4 +1,8 @@
 swirl_out <- function(..., skip_before=TRUE, skip_after=FALSE) {
+  if(grepl('mingw', sessionInfo()$R.version$os)){
+    ... <- iconv(...,"UTF-8","BIG5")
+  }
+
   wrapped <- strwrap(str_c(..., sep = " "),
                      width = getOption("width") - 2)
   mes <- str_c("| ", wrapped, collapse = "\n")
@@ -12,6 +16,7 @@ swirl_out <- function(..., skip_before=TRUE, skip_after=FALSE) {
   }
   message(mes)
 }
+
 
 
 # Takes a plain English name and turns it into a more proper 
