@@ -54,6 +54,7 @@ compile_languages <- function(){
   
   menus_dir <- file.path(clone_dir, "menus")
   menus <- list.files(menus_dir, pattern = "yaml$", full.names = TRUE)
+  print(menus)
   
   for(i in menus){
     lang_name <- sub(".yaml$", "", basename(i))
