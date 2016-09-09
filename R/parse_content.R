@@ -35,13 +35,13 @@ wrap_encoding <- function(raw_yaml) {
     retval
   } else {
     if (class(raw_yaml) == "character") {
-      if (Encoding(raw_yaml) == "unknown" ) {
-        Encoding(raw_yaml) <- "UTF-8"
-      }
-      # if (Encoding(raw_yaml) == "unknown") {
-      #   if(grepl('mingw', sessionInfo()$R.version$os)){Encoding(raw_yaml) <- "BIG5"
-      #   }else{Encoding(raw_yaml) <- "UTF-8"}
-      # }      
+      # if (Encoding(raw_yaml) == "unknown" ) {
+      #   Encoding(raw_yaml) <- "UTF-8"
+      # }
+      if (Encoding(raw_yaml) == "unknown") {
+        if(grepl('mingw', sessionInfo()$R.version$os)){Encoding(raw_yaml) <- "BIG5"
+        }else{Encoding(raw_yaml) <- "UTF-8"}
+      }      
       
     }
     raw_yaml
