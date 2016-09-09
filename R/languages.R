@@ -54,7 +54,6 @@ compile_languages <- function(){
   
   menus_dir <- file.path(clone_dir, "menus")
   menus <- list.files(menus_dir, pattern = "yaml$", full.names = TRUE)
-  print(menus)
   
   for(i in menus){
     lang_name <- sub(".yaml$", "", basename(i))
@@ -93,7 +92,9 @@ s_helper <- function(x){
 
 #' @importFrom stringr str_match
 check_strings <- function(){
-  load(file.path("R", "sysdata.rda"))
+  if(grepl('mingw', sessionInfo()$R.version$os)){load(file.path("R", "sysdata_win.rda"))
+  }else{load(file.path("R", "sysdata.rda"))}
+
   langs <- ls()
   ##langs <- "english"
   
