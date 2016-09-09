@@ -1,7 +1,8 @@
 swirl_out <- function(..., skip_before=TRUE, skip_after=FALSE) {
-  if(grepl('mingw', sessionInfo()$R.version$os)){
-    ... <- iconv(...,"UTF-8","BIG5")
-  }
+  ## windows
+  # if(grepl('mingw', sessionInfo()$R.version$os)){
+  #   ... <- iconv(...,"UTF-8","BIG5")
+  # }
 
   wrapped <- strwrap(str_c(..., sep = " "),
                      width = getOption("width") - 2)
@@ -11,9 +12,9 @@ swirl_out <- function(..., skip_before=TRUE, skip_after=FALSE) {
 
   Encoding(mes) <- "UTF-8"
   ## windows
-  if(grepl('mingw', sessionInfo()$R.version$os)){
-    mes <- iconv(mes,"UTF-8","BIG5")
-  }
+  # if(grepl('mingw', sessionInfo()$R.version$os)){
+  #   mes <- iconv(mes,"UTF-8","BIG5")
+  # }
   message(mes)
 }
 
