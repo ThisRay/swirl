@@ -10,21 +10,19 @@ swirl_out <- function(..., skip_before=TRUE, skip_after=FALSE) {
   if(skip_before) mes <- paste0("\n", mes)
   if(skip_after) mes <- paste0(mes, "\n")
 
-  if(grepl('mingw', sessionInfo()$R.version$os)){
-    Encoding(mes) <- "BIG5"
-  }else{
-    Encoding(mes) <- "UTF-8"
-  }
+  # if(grepl('mingw', sessionInfo()$R.version$os)){
+  #   Encoding(mes) <- "BIG5"
+  # }else{
+  #   Encoding(mes) <- "UTF-8"
+  # }
   
   
-  #Encoding(mes) <- "UTF-8"
-  
-  
+  Encoding(mes) <- "UTF-8"
   
   ## windows
-  # if(grepl('mingw', sessionInfo()$R.version$os)){
-  #   mes <- iconv(mes,"UTF-8","BIG5")
-  # }
+  if(grepl('mingw', sessionInfo()$R.version$os)){
+    mes <- iconv(mes,"UTF-8","BIG5")
+  }
   message(mes)
 }
 
