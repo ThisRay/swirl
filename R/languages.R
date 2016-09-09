@@ -92,10 +92,13 @@ s_helper <- function(x){
 
 #' @importFrom stringr str_match
 check_strings <- function(){
-  # if(grepl('mingw', sessionInfo()$R.version$os)){load(file.path("R", "sysdata_win.rda"))
-  # }else{load(file.path("R", "sysdata.rda"))}
+  if(grepl('mingw', sessionInfo()$R.version$os)){
+    load(file.path("R", "sysdata_win.rda"))
+  }else{
+    load(file.path("R", "sysdata.rda"))
+  }
 
-  load(file.path("R", "sysdata.rda"))
+  #load(file.path("R", "sysdata.rda"))
   langs <- ls()
   ##langs <- "english"
   
