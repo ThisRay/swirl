@@ -167,7 +167,7 @@ check_strings <- function(){
   
 ## original  
 load(file.path("R", "sysdata123.rda"))
-message('HEYYYYYYYYYYYYY')
+# message('HEYYYYYYYYYYYYY')
 langs <- ls()
 for(i in list.files("R", pattern = "\\.R$")){
   source_code <- readLines(file.path("R", i), warn = FALSE)
