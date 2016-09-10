@@ -167,18 +167,19 @@ check_strings <- function(){
   
 ## original  
 load(file.path("R", "sysdata123.rda"))
-    langs <- ls()
-    for(i in list.files("R", pattern = "\\.R$")){
-      source_code <- readLines(file.path("R", i), warn = FALSE)
-      strings <- grep("s\\(\\)%N%", source_code)
-      for(j in strings){
-        for(l in langs){
-          if(!(str_match(source_code[j], '"(.*?)"')[,2] %in% eval(parse(text = paste0("names(", l, ")"))))){
-            message(l, " : '", str_match(source_code[j], '"(.*?)"')[,2], "' : ", i)
-            ##cat('"', str_match(source_code[j], '"(.*?)"')[,2], '"', ':\n "', str_match(source_code[j], '"(.*?)"')[,2], '"\n\n',  sep = "")
-          }
-        }
+message('HEYYYYYYYYYYYYY')
+langs <- ls()
+for(i in list.files("R", pattern = "\\.R$")){
+  source_code <- readLines(file.path("R", i), warn = FALSE)
+  strings <- grep("s\\(\\)%N%", source_code)
+  for(j in strings){
+    for(l in langs){
+      if(!(str_match(source_code[j], '"(.*?)"')[,2] %in% eval(parse(text = paste0("names(", l, ")"))))){
+        message(l, " : '", str_match(source_code[j], '"(.*?)"')[,2], "' : ", i)
+        ##cat('"', str_match(source_code[j], '"(.*?)"')[,2], '"', ':\n "', str_match(source_code[j], '"(.*?)"')[,2], '"\n\n',  sep = "")
       }
     }
+  }
+}
 
 }
