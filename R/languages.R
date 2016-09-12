@@ -48,31 +48,32 @@ select_language <- function(language = NULL, append_rprofile = FALSE){
 
 # set working directory to swirl repo before using
 #' @importFrom yaml yaml.load_file
-compile_languages <- function(){
-  ctime <- as.integer(Sys.time())
-  clone_dir <- file.path(tempdir(), ctime)
-  dir.create(clone_dir, showWarnings = FALSE)
-  git_clone <- paste("git clone https://github.com/thisray/translations.git", clone_dir)
-  system(git_clone)
+
+# compile_languages <- function(){
+#   ctime <- as.integer(Sys.time())
+#   clone_dir <- file.path(tempdir(), ctime)
+#   dir.create(clone_dir, showWarnings = FALSE)
+#   git_clone <- paste("git clone https://github.com/thisray/translations.git", clone_dir)
+#   system(git_clone)
   
-  menus_dir <- file.path(clone_dir, "menus")
-  menus <- list.files(menus_dir, pattern = "yaml$", full.names = TRUE)
+#   menus_dir <- file.path(clone_dir, "menus")
+#   menus <- list.files(menus_dir, pattern = "yaml$", full.names = TRUE)
   
-  for(i in menus){
-    lang_name <- sub(".yaml$", "", basename(i))
-    cmd <- paste0(lang_name, " <- wrap_encoding(yaml.load_file('", i, "'))")
-    eval(parse(text=cmd))
-  }
+#   for(i in menus){
+#     lang_name <- sub(".yaml$", "", basename(i))
+#     cmd <- paste0(lang_name, " <- wrap_encoding(yaml.load_file('", i, "'))")
+#     eval(parse(text=cmd))
+#   }
   
-  comma_sep_langs <- paste(sub(".yaml$", "", basename(menus)), collapse = ", ")
-  if(grepl('mingw', sessionInfo()$R.version$os)){
-    cmd <- paste0("save(", comma_sep_langs, ", file = file.path('R', 'sysdata_win.rda'))")
-  }else{
-    cmd <- paste0("save(", comma_sep_langs, ", file = file.path('R', 'sysdata.rda'))")
-  }
-  eval(parse(text=cmd))
-  unlink(clone_dir, recursive = TRUE, force = TRUE)
-}
+#   comma_sep_langs <- paste(sub(".yaml$", "", basename(menus)), collapse = ", ")
+#   if(grepl('mingw', sessionInfo()$R.version$os)){
+#     cmd <- paste0("save(", comma_sep_langs, ", file = file.path('R', 'sysdata_win.rda'))")
+#   }else{
+#     cmd <- paste0("save(", comma_sep_langs, ", file = file.path('R', 'sysdata.rda'))")
+#   }
+#   eval(parse(text=cmd))
+#   unlink(clone_dir, recursive = TRUE, force = TRUE)
+# }
 
 "%N%" <- function(f, y){
   result <- f(y)
