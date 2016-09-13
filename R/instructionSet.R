@@ -245,7 +245,8 @@ loadCustomTests <- function(lespath){
   customTests$AUTO_DETECT_NEWVAR <- TRUE
   cfile <- file.path(lespath,"customTests.R")
   if(file.exists(cfile)){
-    source(cfile, local=customTests)
+    # tr here
+    source(cfile, local=customTests, encoding="UTF-8")
   }
   return(TRUE) # legacy
 }
