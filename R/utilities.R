@@ -1,46 +1,12 @@
 swirl_out <- function(..., skip_before=TRUE, skip_after=FALSE) {
-  ## windows
-  # if(grepl('mingw', sessionInfo()$R.version$os)){
-  #   ... <- iconv(...,"UTF-8","BIG5")
-  # }
-
   wrapped <- strwrap(str_c(..., sep = " "),
                      width = getOption("width") - 2)
-  
-  # if(grepl('mingw', sessionInfo()$R.version$os)){
-  #   wrapped <- iconv(wrapped,"UTF-8","BIG5")
-  # }
-  
   mes <- str_c("| ", wrapped, collapse = "\n")
   if(skip_before) mes <- paste0("\n", mes)
   if(skip_after) mes <- paste0(mes, "\n")
-
-   #if(grepl('mingw', sessionInfo()$R.version$os)){
-   #  Encoding(mes) <- "BIG5"
-   #}else{
-   #  Encoding(mes) <- "UTF-8"
-   #}
-
-	Encoding(mes) <- "UTF-8"
-  
-	# test_is.BIG5 <- function(s){!is.na(iconv(iconv(s,"BIG5","UTF-8"),"UTF-8","BIG5"))}
-	# test_is.UTF8 <- function(s){!is.na(iconv(iconv(s,"UTF-8","BIG5"),"BIG5","UTF-8"))}  
- ## if(test_is.BIG5(mes)){mes<-'999999999999999'}
- ## ## windows
- # if(grepl('mingw', sessionInfo()$R.version$os)){
- #   #mes <- iconv(mes,"UTF-8","BIG5")
-    
- #  if(test_is.BIG5(mes)){
- #   mes <- 'BIG5 BIG5 BIG5 BIG5'
- #  }else if(test_is.UTF8(mes)){
- #   mes <- 'UTF8 UTF8 UTF8 UTF8'}
- # }
-  
-  
+  Encoding(mes) <- "UTF-8"
   message(mes)
 }
-
-
 
 # Takes a plain English name and turns it into a more proper 
 # file or directory name
