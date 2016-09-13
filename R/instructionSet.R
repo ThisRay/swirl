@@ -57,7 +57,6 @@ waitUser.video <- function(current.row, e){
 waitUser.figure <- function(current.row, e){
   fp <- file.path(e$path, current.row[,"Figure"])
   local({
-    # tr here
     source(fp,local=TRUE, encoding="UTF-8")
     xfer(environment(), globalenv())
     temp <- as.list(environment())
@@ -246,7 +245,6 @@ loadCustomTests <- function(lespath){
   customTests$AUTO_DETECT_NEWVAR <- TRUE
   cfile <- file.path(lespath,"customTests.R")
   if(file.exists(cfile)){
-    # tr here
     source(cfile, local=customTests, encoding="UTF-8")
   }
   return(TRUE) # legacy
