@@ -1,10 +1,9 @@
 swirl_language <- function(){
   lang <- getOption("swirl_language")
-  # langs <- c("chinese_traditional", "chinese_simplified", "english", "french", "german", "korean", 
-  #           "spanish", "turkish")
 
-  langs <- c("chinese_traditional", "cht_mac", "cht_win", "cht_win2", "english")
-  
+  langs <- c("cht_mac", "cht_win", "chinese_simplified", "english", "french", "german", "korean", 
+             "spanish", "turkish")
+
   if(is.null(lang) || !(lang %in% langs)){
     "english"
   } else {
@@ -27,9 +26,8 @@ swirl_language <- function(){
 #' 
 #' @export
 select_language <- function(language = NULL, append_rprofile = FALSE){
-  # langs <- c("chinese_traditional", "chinese_simplified", "english", "french", "german", "korean", 
-  #           "spanish", "turkish")
-    langs <- c("chinese_traditional", "cht_mac", "cht_win", "cht_win2", "english")
+  langs <- c("cht_mac", "cht_win", "chinese_simplified", "english", "french", "german", "korean", 
+             "spanish", "turkish")
   if(is.null(language)){
     selection <- select.list(langs)
   } else if(!(language %in% langs)){
@@ -48,32 +46,28 @@ select_language <- function(language = NULL, append_rprofile = FALSE){
 
 # set working directory to swirl repo before using
 #' @importFrom yaml yaml.load_file
-
-# compile_languages <- function(){
-#   ctime <- as.integer(Sys.time())
-#   clone_dir <- file.path(tempdir(), ctime)
-#   dir.create(clone_dir, showWarnings = FALSE)
-#   git_clone <- paste("git clone https://github.com/thisray/translations.git", clone_dir)
-#   system(git_clone)
+compile_languages <- function(){
+  ctime <- as.integer(Sys.time())
+  clone_dir <- file.path(tempdir(), ctime)
+  dir.create(clone_dir, showWarnings = FALSE)
+  git_clone <- paste("git clone https://github.com/swirldev/translations.git", clone_dir)
+  git_clone <- paste("git clone https://github.com/thisray/translations.git", clone_dir)
+  system(git_clone)
   
-#   menus_dir <- file.path(clone_dir, "menus")
-#   menus <- list.files(menus_dir, pattern = "yaml$", full.names = TRUE)
+  menus_dir <- file.path(clone_dir, "menus")
+  menus <- list.files(menus_dir, pattern = "yaml$", full.names = TRUE)
   
-#   for(i in menus){
-#     lang_name <- sub(".yaml$", "", basename(i))
-#     cmd <- paste0(lang_name, " <- wrap_encoding(yaml.load_file('", i, "'))")
-#     eval(parse(text=cmd))
-#   }
+  for(i in menus){
+    lang_name <- sub(".yaml$", "", basename(i))
+    cmd <- paste0(lang_name, " <- wrap_encoding(yaml.load_file('", i, "'))")
+    eval(parse(text=cmd))
+  }
   
-#   comma_sep_langs <- paste(sub(".yaml$", "", basename(menus)), collapse = ", ")
-#   if(grepl('mingw', sessionInfo()$R.version$os)){
-#     cmd <- paste0("save(", comma_sep_langs, ", file = file.path('R', 'sysdata_win.rda'))")
-#   }else{
-#     cmd <- paste0("save(", comma_sep_langs, ", file = file.path('R', 'sysdata.rda'))")
-#   }
-#   eval(parse(text=cmd))
-#   unlink(clone_dir, recursive = TRUE, force = TRUE)
-# }
+  comma_sep_langs <- paste(sub(".yaml$", "", basename(menus)), collapse = ", ")
+  cmd <- paste0("save(", comma_sep_langs, ", file = file.path('R', 'sysdata.rda'))")
+  eval(parse(text=cmd))
+  unlink(clone_dir, recursive = TRUE, force = TRUE)
+}
 
 "%N%" <- function(f, y){
   result <- f(y)
@@ -89,10 +83,6 @@ s <- function(){
 }
 
 s_helper <- function(x){
-
-  # if(grepl('mingw', sessionInfo()$R.version$os)){
-  #   x <- iconv(x,'UTF-8','BIG5')}
-
   cmd <- paste0(swirl_language(), "$`", x, "`")
   tryCatch(eval(parse(text=cmd)),
     warning = function(c) NULL
@@ -104,86 +94,20 @@ s_helper <- function(x){
 
 #' @importFrom stringr str_match
 check_strings <- function(){
-  # if(grepl('mingw', sessionInfo()$R.version$os)){
-  #   load(file.path("R", "sysdata_win22.rda"))
-  #   langs <- ls()
-  #   for(i in list.files("R", pattern = "\\.R$")){
-  #     source_code <- readLines(file.path("R", i), warn = FALSE )
-  #     strings <- grep("s\\(\\)%N%", source_code)
-  #     for(j in strings){
-  #       for(l in langs){
-  #         if(!(str_match(source_code[j], '"(.*?)"')[,2] %in% eval(parse(text = paste0("names(", l, ")") )))){
-  #           message(l, " : '", str_match(source_code[j], '"(.*?)"')[,2], "' : ", i)
-  #           ##cat('"', str_match(source_code[j], '"(.*?)"')[,2], '"', ':\n "', str_match(source_code[j], '"(.*?)"')[,2], '"\n\n',  sep = "")
-  #         }
-  #       }
-  #     }
-  #   }
-
-
-  # }else{
-  #   load(file.path("R", "sysdata.rda"))
-  #   langs <- ls()
-  #   for(i in list.files("R", pattern = "\\.R$")){
-  #     source_code <- readLines(file.path("R", i), warn = FALSE)
-  #     strings <- grep("s\\(\\)%N%", source_code)
-  #     for(j in strings){
-  #       for(l in langs){
-  #         if(!(str_match(source_code[j], '"(.*?)"')[,2] %in% eval(parse(text = paste0("names(", l, ")"))))){
-  #           message(l, " : '", str_match(source_code[j], '"(.*?)"')[,2], "' : ", i)
-  #           ##cat('"', str_match(source_code[j], '"(.*?)"')[,2], '"', ':\n "', str_match(source_code[j], '"(.*?)"')[,2], '"\n\n',  sep = "")
-  #         }
-  #       }
-  #     }
-  #   }
-
-  # }
-
-# ## test
-# load(file.path("R", "sysdata.rda"))
-#     langs <- ls()
-#     for(i in list.files("R", pattern = "\\.R$")){
-#       source_code <- readLines(file.path("R", i), warn = FALSE)
-      
-#       if(grepl('mingw', sessionInfo()$R.version$os)){
-      
-#           win_make_yaml <- function(ls){
-#         	for(i in 1:length(ls)){
-#         		ls[[i]] <- iconv(ls[[i]],"UTF-8","BIG5")}
-#         		ls
-#           }
-#         source_code <- win_make_yaml(source_code)
-      
-#       }
-      
-      
-#       strings <- grep("s\\(\\)%N%", source_code)
-#       for(j in strings){
-#         for(l in langs){
-#           if(!(str_match(source_code[j], '"(.*?)"')[,2] %in% eval(parse(text = paste0("names(", l, ")"))))){
-#             message(l, " : '", str_match(source_code[j], '"(.*?)"')[,2], "' : ", i)
-#             ##cat('"', str_match(source_code[j], '"(.*?)"')[,2], '"', ':\n "', str_match(source_code[j], '"(.*?)"')[,2], '"\n\n',  sep = "")
-#           }
-#         }
-#       }
-#     }
+  load(file.path("R", "sysdata.rda"))
+  langs <- ls()
+  ##langs <- "english"
   
-  
-## original  
-load(file.path("R", "sysdata.rda"))
-# message('HEYYYYYYYYYYYYY')
-langs <- ls()
-for(i in list.files("R", pattern = "\\.R$")){
-  source_code <- readLines(file.path("R", i), warn = FALSE)
-  strings <- grep("s\\(\\)%N%", source_code)
-  for(j in strings){
-    for(l in langs){
-      if(!(str_match(source_code[j], '"(.*?)"')[,2] %in% eval(parse(text = paste0("names(", l, ")"))))){
-        message(l, " : '", str_match(source_code[j], '"(.*?)"')[,2], "' : ", i)
-        ##cat('"', str_match(source_code[j], '"(.*?)"')[,2], '"', ':\n "', str_match(source_code[j], '"(.*?)"')[,2], '"\n\n',  sep = "")
+  for(i in list.files("R", pattern = "\\.R$")){
+    source_code <- readLines(file.path("R", i), warn = FALSE)
+    strings <- grep("s\\(\\)%N%", source_code)
+    for(j in strings){
+      for(l in langs){
+        if(!(str_match(source_code[j], '"(.*?)"')[,2] %in% eval(parse(text = paste0("names(", l, ")"))))){
+          message(l, " : '", str_match(source_code[j], '"(.*?)"')[,2], "' : ", i)
+          ##cat('"', str_match(source_code[j], '"(.*?)"')[,2], '"', ':\n "', str_match(source_code[j], '"(.*?)"')[,2], '"\n\n',  sep = "")
+        }
       }
     }
   }
-}
-
 }
