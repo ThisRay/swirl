@@ -57,7 +57,7 @@ waitUser.video <- function(current.row, e){
 waitUser.figure <- function(current.row, e){
   fp <- file.path(e$path, current.row[,"Figure"])
   local({
-    source(fp,local=TRUE, encoding="UTF-8")
+    source(fp,local=TRUE) #, encoding="UTF-8")  tr here
     xfer(environment(), globalenv())
     temp <- as.list(environment())
     e$snapshot <- c(e$snapshot, temp)
