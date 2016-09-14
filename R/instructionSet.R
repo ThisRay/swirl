@@ -1,7 +1,7 @@
 # Instruction set for swirl.R's "virtual machine".
 
 # All classes first Output, all in the same way, hence one method
-# suffices.
+# suffices. 
 #
 present <- function(current.row, e)UseMethod("present")
 

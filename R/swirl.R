@@ -288,7 +288,7 @@ resume.default <- function(e, ...){
     correctAns <- e$current.row[,"CorrectAnswer"]
     
     # If we are on a script question, the correct answer should  ## tr here
-    # simply source the correct script
+    # simply source the correct script 
     if(is(e$current.row, "script") && is.na(correctAns)) {
       correct_script_path <- e$correct_script_temp_path
       if(file.exists(correct_script_path)) {
