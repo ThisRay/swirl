@@ -297,7 +297,7 @@ resume.default <- function(e, ...){
         e$script_contents <- readLines(correct_script_path, warn = FALSE, encoding="UTF-8")
         # Save expr to e
         # e$expr <- try(parse(text = e$script_contents), silent = TRUE)
-        e$expr <- try(parse(text = e$script_contents), silent = TRUE, encoding="UTF-8")
+        e$expr <- try(parse(text = e$script_contents, encoding="UTF-8"), silent = TRUE)
         # Source the correct script
         #try(source(correct_script_path))  # tr here  , encoding="UTF-8"
         try(source(correct_script_path, encoding="UTF-8"))
