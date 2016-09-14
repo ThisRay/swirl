@@ -5,7 +5,7 @@ do_play <- function(e)UseMethod("do_play")
 do_main <- function(e)UseMethod("do_main")
 do_restart <- function(e)UseMethod("do_restart")
 
-do_nxt.default <- function(e) {
+do_nxt.default <- function(e) { 
   ## Using the stored list of "official" swirl variables and values,
   #  assign variables of the same names in the global environment
   #  their "official" values, in case the user has changed them

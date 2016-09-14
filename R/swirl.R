@@ -257,7 +257,7 @@ resume.default <- function(e, ...){
   if(uses_func("info")(e$expr)[[1]]){
     esc_flag <- FALSE
     return(TRUE)
-  }
+  } 
   
   if(uses_func("nxt")(e$expr)[[1]]){
     do_nxt(e)
